@@ -343,7 +343,7 @@
       <hr>
       <h2>Contact Us</h2>
       <p><strong>Company Name:</strong>Metanakan Corporation</p>
-      <p><strong>Email:</strong> <a href="mailto:info@metanakan.com">info@metanakan.com</a></p>
+      <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#c9a0a7afa689a4acbda8a7a8a2a8a7e7aaa6a4"><span class="__cf_email__" data-cfemail="41282f272e012c2435202f202a202f6f222e2c">[email&#160;protected]</span></a></p>
       <p><strong>Phone:</strong> <a href="tel:09945509782">NO. 0994-550-9782</a></p>
       <p><strong>Address:</strong> 20-11 Ohio Street, Villasol Subdivision, Brgy. Anunas, Angeles City</p>
       <p><strong>Facebook:</strong> <a href="https://facebook.com/kpmpngn" target="_blank">metanakankapampangan</a></p>
@@ -358,7 +358,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // =======================================================
     //  AUTHENTICATION LOGIC
     // =======================================================
@@ -419,6 +419,14 @@
         if(storedPass === pass) {
           overlay.style.display = 'none';
           phoneShell.classList.remove('app-hidden');
+          
+          // Render news cards after login
+          setTimeout(() => {
+            if(typeof renderBigNewsCards === 'function') {
+              renderBigNewsCards();
+            }
+          }, 100);
+          
           alert("Welcome back, " + user + "!");
         } else {
           alert("Invalid Username or Password.");
@@ -462,15 +470,4 @@
         "Clark was once one of the largest US Air Bases in the world."
       ];
       function showRandomFunFact() {
-        const rand = Math.floor(Math.random() * funFacts.length);
-        const element = document.getElementById("funFactText");
-        if (element) element.textContent = funFacts[rand];
-      }
-      showRandomFunFact();
-    });
-  </script>
-
-  <script src="script.js"></script>
-
-</body>
-</html>
+        const rand = Math.floor(Math.random() * funFacts.
