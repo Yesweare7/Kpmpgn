@@ -28,6 +28,71 @@ document.addEventListener("DOMContentLoaded", () => {
     card.addEventListener("click", () => showPage(card.dataset.page));
   });
 
+  // =========================
+// LOGIN SYSTEM FIX
+// =========================
+
+// Load saved user (if any)
+let currentUser = localStorage.getItem("kpmpngnUser");
+
+// If someone is already logged in, remove the login overlay
+window.addEventListener("DOMContentLoaded", () => {
+  if (currentUser) {
+    document.getElementById("loginOverlay").style.display = "none";
+    document.querySelector(".phone-shell").classList.remove("app-hidden");
+  }
+});
+
+// LOGIN SUBMIT
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const user = document.getElementById("loginUser").value.trim();
+  const pass = document.getElementById("loginPass").value.trim();
+
+  if (user.length < 3 || pass.length < 3) {
+    alert("Invalid username or password.");
+    return;
+  }
+
+  // Save session
+  localStorage.setItem("kpmpngnUser", user);
+
+  // Hide overlay + show app
+  document.getElementById("loginOverlay").style.display = "none";
+  document.querySelector(".phone-shell").classList.remove("app-hidden");
+
+  alert("Welcome, " + user + "!");
+});
+
+// REGISTER SUBMIT
+document.getElementById("registerForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const rUser = document.getElementById("regUser").value.trim();
+  const rPass = document.getElementById("regPass").value.trim();
+
+  if (rUser.length < 3 || rPass.length < 3) {
+    alert("Username & password must be at least 3 characters.");
+    return;
+  }
+
+  alert("Account created! Please login.");
+  switchForm("login");
+});
+
+// SIMPLE FORM SWITCH FUNCTION
+function switchForm(type) {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("registerForm").style.display = "none";
+  document.getElementById("forgotForm").style.display = "none";
+
+  if (type === "login") document.getElementById("loginForm").style.display = "block";
+  if (type === "register") document.getElementById("registerForm").style.display = "block";
+  if (type === "forgot") document.getElementById("forgotForm").style.display = "block";
+}
+
+
   const detailModal = document.getElementById("detailModal");
   const modalImg    = document.getElementById("modalImg");
   const modalTitle  = document.getElementById("modalTitle");
@@ -1972,4 +2037,5 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.log("SW Error:", err));
   });
 }
+
 
