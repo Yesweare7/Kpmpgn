@@ -1923,33 +1923,36 @@ address: "Sarmiento St. Malabanias, Angeles City, Pampanga",
 
   // 6. RENDER NEWS (Big Cards Layout)
   function renderBigNewsCards() {
-    const container = document.getElementById("news-list");
-    if(container && typeof news !== 'undefined' && news && news.length > 0) {
-      container.innerHTML = "";
-      news.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "big-news-card";
-        
-        card.innerHTML = `
-          <div class="big-news-thumb" style="background-image:url('${item.image}')"></div>
-          <div class="big-news-body">
-            <h3 class="big-news-title">${item.name}</h3>
-            <p class="big-news-desc">${item.description}</p>
-          </div>
-        `;
-        
-        card.addEventListener("click", () => openDetail(item));
-        container.appendChild(card);
-      });
-      console.log("Big News Cards rendered:", news.length);
-    } else {
-      console.log("News rendering failed:", {
-        container: !!container,
-        newsExists: typeof news !== 'undefined',
-        newsLength: news ? news.length : 0
-      });
-    }
+  const container = document.getElementById("news-list");
+  if(container && typeof news !== 'undefined' && news && news.length > 0) {
+    container.innerHTML = "";
+    news.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "big-news-card";
+      
+      card.innerHTML = `
+        <div class="big-news-thumb" style="background-image:url('${item.image}')"></div>
+        <div class="big-news-body">
+          <h3 class="big-news-title">${item.name}</h3>
+          <p class="big-news-desc">${item.description}</p>
+        </div>
+      `;
+      
+      card.addEventListener("click", () => openDetail(item));
+      container.appendChild(card);
+    });
+    console.log("✅ Big News Cards rendered:", news.length);
+  } else {
+    console.log("❌ News rendering failed:", {
+      container: !!container,
+      newsExists: typeof news !== 'undefined',
+      newsLength: news ? news.length : 0
+    });
   }
+}
+
+// ⭐ ADD THIS LINE TO MAKE IT GLOBAL
+window.renderBigNewsCards = renderBigNewsCards;
   
   // Call after DOM is fully loaded
   if (document.readyState === 'loading') {
@@ -1969,3 +1972,4 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.log("SW Error:", err));
   });
 }
+
