@@ -1924,7 +1924,7 @@ address: "Sarmiento St. Malabanias, Angeles City, Pampanga",
   // 6. RENDER NEWS (Big Cards Layout)
   function renderBigNewsCards() {
     const container = document.getElementById("news-list");
-    if(container && news && news.length > 0) {
+    if(container && typeof news !== 'undefined' && news && news.length > 0) {
       container.innerHTML = "";
       news.forEach(item => {
         const card = document.createElement("div");
@@ -1942,9 +1942,21 @@ address: "Sarmiento St. Malabanias, Angeles City, Pampanga",
         container.appendChild(card);
       });
       console.log("Big News Cards rendered:", news.length);
+    } else {
+      console.log("News rendering failed:", {
+        container: !!container,
+        newsExists: typeof news !== 'undefined',
+        newsLength: news ? news.length : 0
+      });
     }
   }
-  renderBigNewsCards();
+  
+  // Call after DOM is fully loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderBigNewsCards);
+  } else {
+    renderBigNewsCards();
+  }
 
   // Fun Fact
   const ffText = document.getElementById('funFactText');
