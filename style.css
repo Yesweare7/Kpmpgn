@@ -49,6 +49,13 @@ body{
   position: relative; /* Required for the overlay */
 }
 
+.phone-shell.app-hidden { display: none; }
+
+.app-hidden {
+  display: none !important;
+}
+
+
 /* ---- DARK OVERLAY (Makes text readable over the image) ---- */
 .phone-shell::before {
   content: "";
